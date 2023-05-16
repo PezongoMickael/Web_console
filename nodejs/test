@@ -1,0 +1,15 @@
+const childProcess = exec('nmap -sV -vv 192.168.136.134');
+
+childProcess.stdout.on('data', (data) => {
+  console.log(`\n${data}`);
+});
+
+childProcess.stderr.on('data', (data) => {
+  console.error(`Erreur de sortie de la commande : ${data}`);
+});
+
+childProcess.on('close', (code) => {
+  if (code !== 0) {
+    console.error(`Erreur lors de l'exécution de la commande. Code de sortie : ${code}`);
+  }
+});

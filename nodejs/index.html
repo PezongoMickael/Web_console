@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Console</title>
+</head>
+<body>
+  <pre id="output"></pre>
+  <script>
+    const output = document.getElementById('output');
+    const socket = new WebSocket('ws://localhost:5000');
+
+    socket.onmessage = (event) => {
+      const data = event.data;
+
+      if (data === 'FIN') {
+        socket.close();
+      } else {
+        output.textContent += data;
+      }
+    };
+
+    socket.onclose = () => {
+      output.textContent += '\nConnexion WebSocket fermée.';
+    };
+
+    // Envoyer la commande au serveur WebSocket
+    socket.onopen = () => {
+      const command = JSON.stringify({ command: 'ifconfig' });
+      socket.send(command);
+    };
+  </script>
+</body>
+</html>
