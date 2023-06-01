@@ -1,0 +1,130 @@
+body {
+    background-image: url("https://www.wallpapertip.com/wmimgs/54-542184_raspberry-pi-4-logo.jpg");
+    background-size: cover;
+    color: #e6e6e6;
+    font-family: "Courier New", Courier, monospace;
+    margin: 0;
+}
+
+.top-bar {
+    background-color: #050f17;
+    padding: 10px;
+}
+
+.welcome-message {
+    text-align: center;
+}
+
+.welcome-message p {
+    color: #fff;
+    font-size: 24px;
+    margin: 0;
+  
+    border-radius: 10px;
+    margin-bottom: 10px;
+    
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 50px); /* Subtract the height of the top bar */
+}
+
+.terminal {
+    background-color: #000;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 600px;
+    max-width: 90%;
+}
+
+.title {
+    background-color: #025aad;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.title h1 {
+    color: #fff;
+    font-size: 24px;
+    margin: 0;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.input-line span {
+    color: #8cff8c;
+    padding-right: 5px;
+}
+
+.input-line input {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    color: #e6e6e6;
+    outline: none;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+}
+
+#runButton {
+    background-color: #025aad;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.commands {
+    display: flex;
+    justify-content: center;
+}
+
+.commandButton {
+    background-color: #025aad;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 3px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#output {
+    white-space: pre-wrap;
+}
+
+/* Le reste du code CSS reste inchangé */
+
+/* Le reste du code CSS reste inchangé */
+
+#resultArea {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.result {
+    color: #8cff8c;
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    background-color: #111;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
