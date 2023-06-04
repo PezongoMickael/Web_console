@@ -1,13 +1,28 @@
-const { spawn } = require('child_process');
+// const { spawn } = require('child_process');
+// const express = require('express');
+// const cors = require('cors');
+
+// const app = express();
+
+
+
+// const port = 5000;
+// app.listen(port, () => {
+//   console.log(`Serveur en écoute sur le port ${port}`);
+// });
+
 const express = require('express');
 const cors = require('cors');
+const ansiHTML = require('ansi-html');
+const { spawn } = require('child_process');
 
 const app = express();
-app.use(express.json());
+app.use(express.json())
 app.use(cors({
   origin: "http://localhost:3000",
   credentials: true
 }));
+const port = 5000;
 
 app.get('/api/console/stream', (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream');
@@ -50,8 +65,7 @@ app.get('/api/console/stream', (req, res) => {
 
   // Fermer la connexion SSE lorsque la connexion client est terminée
 });
-
-const port = 5000;
+// Démarrer le serveur
 app.listen(port, () => {
-  console.log(`Serveur en écoute sur le port ${port}`);
+  console.log(`Serveur web démarré sur le port ${port}`);
 });

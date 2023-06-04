@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import parse from 'html-react-parser';
+import axios from 'axios';
 import './command.css'
 
 const CommandExecution = () => {
   const [command, setCommand] = useState('');
+  const [msfcommand, setMsfCommand] = useState('');
   const [output, setOutput] = useState('');
+  const [msfOutput, setMsfOutput] = useState('');
   const [eventSource, setEventSource] = useState(null); // Ajout de l'état eventSource
 
   useEffect(() => {
@@ -89,29 +93,26 @@ const CommandExecution = () => {
     const newEventSource = new EventSource('http://localhost:5000/api/console/stream?command=' + encodeURIComponent('whoami'));
     setEventSource(newEventSource); // Mise à jour de l'état eventSource avec la nouvelle connexion SSE
   };
+  const executeMsfCommand = async (event) => {
+    try{
+      axios.get('http://localhost:5001/command?command=' + encodeURIComponent(msfcommand)).then((res) => {
+        setMsfOutput(res.data)
+      });
+    }catch (error){
+      console.log(error);
+    }
+     // Mise à jour de l'état eventSource avec la nouvelle connexion SSE
+  };
+
+  const lines = msfOutput.split('\n');
   return (
     <div>
-      {/* <h2>Exécution de commande</h2>
-      <input
-        type="text"
-        value={command}
-        onChange={e => setCommand(e.target.value)}
-      />
-      <button onClick={executeCommand}>Exécuter</button>
-      <button onClick={stopCommand}>Stop</button>
-      {output && (
-        <div>
-          <h3>Résultat :</h3>
-          <pre>{output}</pre>
-        </div>
-      )} */}
-
-<div className="top-bar">
-        <div className="welcome-message">
-            <p>Bienvenue sur Raspberry Pi Terminal</p>
-        </div>
-    </div>
-    <div className="container">
+      <div className="top-bar">
+              <div className="welcome-message">
+                  <p>Bienvenue sur Raspberry Pi Terminal</p>
+              </div>
+      </div>
+      <div className="container">
         <div className="terminal">
             <div className="title">
                 <h1>START HACKING</h1>
@@ -135,7 +136,25 @@ const CommandExecution = () => {
                 <div id="resultArea"><pre>{output}</pre></div>
             }
         </div>
-    </div>
+        <div className="terminal">
+            <div className="title">
+                <h1>Advanced hacking with msfconsole</h1>
+            </div>
+            <pre id="output"></pre>
+            <div className="input-line">
+                <span>$</span>
+                <input type="text" id="commandInput" autofocus onChange={e => setMsfCommand(e.target.value)}/>
+                <button id="runButton" onClick={executeMsfCommand}>Run</button>
+                <button id="runButton" onClick={stopCommand}>Stop</button>
+            </div>
+            {msfOutput
+              &&
+                <div id="resultArea">
+                  <pre dangerouslySetInnerHTML={{ __html: msfOutput}} />
+                </div>
+            }
+        </div>
+      </div>
     </div>
   );
 };
